@@ -4,10 +4,15 @@ body {
 
 .container {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    background-color: hsl(332, 100%, 61%);
+}
+
+.navbar {
+    justify-content: space-around;
+    justify-items: baseline;
+    background-color: hsl(283, 100%, 61%);
     border-radius: 1rem;
+    padding: 10px;
 }
 
 .nav-link {
@@ -15,5 +20,15 @@ body {
     font-size: 14pt;
     color: white;
     text-decoration: none;
-    padding: 20px;
+    padding: 15px;
+    background-color:hsl(350, 100%, 45%);
+    border-radius: 1rem;
+}
+
+.active {
+    background-color:hsl(350, 100%, 45%);
+}
+
+.logo {
+    justify-content: flex-start;
 }
