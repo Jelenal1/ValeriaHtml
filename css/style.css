@@ -6,23 +6,28 @@ body {
 .container {
     display: flex;
     align-items: center;
+    min-height: 50px;
 }
 
 .navbar {
-    justify-items: baseline;
+    justify-items: center;
     background-color: hsl(283, 100%, 61%);
     border-radius: 2rem;
     padding: 10px;
 }
-
+@media screen and (max-width: 600px) {
+    .nav-link-desktop {
+        display: none;
+    }
+}
+    
 .nav-link {
-    font-size: 14pt;
     color: white;
     text-decoration: none;
     padding: 15px;
     background-color:hsl(350, 100%, 45%);
     border-radius: 1rem;
-    margin-left: 1rem;
+    margin: 0 10px;
     outline: none;
 }
 
@@ -39,3 +44,15 @@ body {
 .logo-text {
     font-size: 15pt;
 }
+
+.red-image {
+    max-width: 95vw;
+    max-height: 95vh;
+    margin: 1px auto;
+    border-radius: 2rem;
+}
+
+.icon {
+    
+}
+
