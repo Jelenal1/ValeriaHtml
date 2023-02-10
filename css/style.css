@@ -52,7 +52,18 @@ body {
     border-radius: 2rem;
 }
 
-.icon {
-    
+.material-symbols-outlined {
+    padding: 2px;
 }
 
+.sidenav-toggler {
+    margin-left: auto;
+    border: none;
+    padding: 5px;
+    background-color: rgba(230, 0, 38, 0);
+}
+
+.sidenav-toggler {
+    cursor: pointer;
+}
+    
