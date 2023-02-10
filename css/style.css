@@ -1,0 +1,19 @@
+body {
+    background-color: hsl(332, 0%, 0%);
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: hsl(332, 100%, 61%);
+    border-radius: 1rem;
+}
+
+.nav-link {
+    font-family: sans-serif;
+    font-size: 14pt;
+    color: white;
+    text-decoration: none;
+    padding: 20px;
+}
