@@ -109,6 +109,9 @@ a {
 
 .container-grid {
     display: grid;
+}
+
+.container-grid.landing {
     grid-template-columns: 1fr 1fr;
 }
 
