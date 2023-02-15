@@ -16,7 +16,7 @@ p, h2, h3, h4, h5, h6, span {
 }
 
 .navbar {
-    background-color: hsl(283, 100%, 45%);
+    background-color: hsl(267, 40%, 50%);
     border-radius: 2rem;
     padding: 15px;
     margin-top: 0;
@@ -94,6 +94,11 @@ a {
    display: none;
 }
   
+
+.container-grid {
+    display: grid;
+    gap: 5px;
+}
 
 @media (min-width: 1781px) {
     .container-grid.landing {
@@ -176,10 +181,20 @@ a {
     color: red;
 }
 
-.container-grid {
-    display: grid;
-    gap: 5px;
+footer {
+    background-color: hsl(267, 38%, 16%);
+    border-radius: 2rem;
+    margin-top: 30px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0px 0px 100px 10px;
+}
+.socialmedia-links a {
+    padding: 10px;
 }
 
-
-
+.socialmedia-links svg {
+    width: 40px;
+    height: 40px;
+}
