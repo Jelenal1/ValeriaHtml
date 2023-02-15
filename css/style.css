@@ -20,6 +20,7 @@ p, h2, h3, h4, h5, h6, span {
     border-radius: 2rem;
     padding: 15px;
     margin-top: 0;
+    box-shadow: 20px 60px 100px 5px;
 }
 
 a {
@@ -92,12 +93,35 @@ a {
 .hidden {
    display: none;
 }
+  
 
-    
+@media (min-width: 1781px) {
+    .container-grid.landing {
+        grid-auto-rows: 85vh;
+    }
+}
 
-@media screen and (max-width: 595px) {
+.container-quote {
+    align-self: center;
+    margin-left: 5px;
+}
+
+.red-image{
+   object-position: top;
+    width: 100%;
+    object-fit: cover;
+    max-height: 100%;
+    border-radius: 2rem;
+    box-shadow: 40px 70px 100px 5px;
+}
+
+
+@media screen and (max-width: 599px) {
     .desktop {
       display: none;
+    }
+    .container-grid {
+        grid-template-columns: 1fr;
     }
   }
 
@@ -110,12 +134,13 @@ a {
     }
     .container-grid.landing {
         grid-template-columns: 1fr 1fr;
+        margin: 0.25rem 0;
     }
     
     .container-grid#about {
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 5px;
-        margin-top: 5px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.25rem;
+        margin: 0.25rem 0;
     }
 }
 
@@ -139,7 +164,16 @@ a {
 
 .card p, .card h3 {
     margin: 5px 0;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+}
+
+.card p {
+    font-size: large;
+}
+
+.card p strong {
+    font-weight: normal;
+    color: red;
 }
 
 .container-grid {
@@ -148,28 +182,4 @@ a {
 }
 
 
-@media (min-width: 1781px) {
-    .container-grid.landing {
-        grid-auto-rows: 85vh;
-    }
-}
 
-@media (max-width: 600px) {
-    .container-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.container-quote {
-    align-self: center;
-    margin-left: 5px;
-}
-
-.red-image{
-   object-position: top;
-    width: 100%;
-    object-fit: cover;
-    max-height: 100%;
-    border-radius: 2rem;
-    
-}
