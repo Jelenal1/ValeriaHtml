@@ -4,7 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!bottomNav.classList.contains('hidden')) {
         bottomNav.classList.add('hidden');
     }
+    if (!sideNavToggler.classList.contains('onnavbar')) {
+        sideNavToggler.classList.add('onnavbar')
+    }
     sideNavToggler.addEventListener('click', (e) => {
         bottomNav.classList.toggle('hidden');
+        sideNavToggler.classList.toggle('onnavbar');
     })
 })

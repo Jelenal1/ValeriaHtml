@@ -2,6 +2,7 @@ body {
     background-color: hsl(267, 38%, 18%);
     font-family: sans-serif;
     margin-top: 0;
+    min-height: 100vh;
 }
 
 p, h2, h3, h4, h5, h6, span {
@@ -11,7 +12,6 @@ p, h2, h3, h4, h5, h6, span {
 .container {
     display: flex;
     align-items: center;
-    min-height: 50px;
     min-width: screen;
 }
 
@@ -21,22 +21,56 @@ p, h2, h3, h4, h5, h6, span {
     padding: 15px;
     margin-top: 0;
     box-shadow: 20px 60px 100px 5px;
+    min-height: 50px;
 }
 
 a {
     text-decoration: none;
 }
 
+.sidenav-toggler {
+    position: fixed;
+    z-index: 1;
+    right: 50px;
+    transition: right 600ms 10ms;
+    cursor: pointer;
+    margin-left: auto;
+    border: none;
+    padding: 5px;
+    background-color: rgba(230, 0, 38, 0);
+}
+
+.onnavbar{
+    right: 25px;
+}
+
 .bottomnav {
-    position: relative;
-    margin: 5px 0;
-    background-color: hsl(283, 100%, 45%);
+    position: fixed;
+    right: 0px;
+    top: 0;
+    background-color: hsl(267, 40%, 45%);
+    opacity: 99%;
     border-radius: 2rem;
     padding: 10px;
     justify-content: center;
+    transition: right 500ms;
+    height: 100vh;
+    min-width: 50px;
 }
 
-    
+
+.hidden{
+    right: -500px;
+}
+
+.nav-links.mobile {
+
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0;
+    align-items: baseline;
+}
+
 .nav-link {
     color: white;
     text-decoration: none;
@@ -82,17 +116,8 @@ a {
     padding: 2px;
 }
 
-.sidenav-toggler {
-    cursor: pointer;
-    margin-left: auto;
-    border: none;
-    padding: 5px;
-    background-color: rgba(230, 0, 38, 0);
-}
 
-.hidden {
-   display: none;
-}
+
   
 
 .container-grid {
@@ -121,7 +146,7 @@ a {
 }
 
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 799px) {
     .desktop {
       display: none;
     }
@@ -130,7 +155,7 @@ a {
     }
   }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
     .sidenav-toggler {
         display: none;
     }
