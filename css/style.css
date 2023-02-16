@@ -2,7 +2,6 @@ body {
     background-color: hsl(267, 38%, 18%);
     font-family: sans-serif;
     margin-top: 0;
-    min-height: 100vh;
 }
 
 p, h2, h3, h4, h5, h6, span {
@@ -174,8 +173,6 @@ a {
         margin: 0.25rem 0;
     }
 }
-
-
 
 .card {
     flex-direction: column;
