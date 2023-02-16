@@ -9,6 +9,7 @@ p, h2, h3, h4, h5, h6, span {
     color: white;
 }
 
+
 .container {
     display: flex;
     align-items: center;
@@ -75,7 +76,7 @@ a {
     color: white;
     text-decoration: none;
     padding: 15px;
-    background-color:hsl(350, 100%, 45%);
+    background-color:hsla(350, 69%, 49%, 0.367);
     border-radius: 1rem;
     margin: 0 1vw;
     outline: none;
@@ -207,13 +208,17 @@ a {
 }
 
 footer {
-    background-color: hsl(267, 38%, 16%);
+    background-color: hsl(267, 38%, 30%);
     border-radius: 2rem;
-    margin-top: 30px;
+    margin-top: 0.5rem;
     flex-direction: column;
     justify-content: center;
     padding: 20px;
     box-shadow: 0px 0px 100px 10px;
+}
+
+footer img {
+    width: 45px;
 }
 .socialmedia-links a {
     padding: 10px;
@@ -222,4 +227,5 @@ footer {
 .socialmedia-links svg {
     width: 40px;
     height: 40px;
+    color: red;
 }
