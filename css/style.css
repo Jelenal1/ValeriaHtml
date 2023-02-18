@@ -7,6 +7,7 @@ body {
 p, h1, h2, h3, h4, h5, h6, span {
     color: white;
     text-align: center;
+    font-family: sans-serif;
 }
 
 
@@ -64,6 +65,10 @@ a {
     right: -500px;
 }
 
+.nonedisplay {
+    display: none;
+}
+
 .nav-links.mobile {
 
     flex-direction: column;
@@ -80,6 +85,7 @@ a {
     border-radius: 1rem;
     margin: 0 10px;
     outline: none;
+    border: none;
 }
 
 
@@ -184,6 +190,7 @@ a {
     background-color: hsl(267, 40%, 30%);
     padding: 20px;
     align-items: center;
+    margin-top: 5px;
 }
 
 .card img {
