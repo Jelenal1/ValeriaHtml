@@ -105,11 +105,7 @@ function editButton(ItemToEditId) {
                 const updatedValue = input.value;
                 parentOfButton.removeChild(input);
                 async function updateLi(ItemToEditId, updatedValue) {
-                    if (parentOfButton.classList.contains('heading')) {
-                        await updateDoc(ItemToEditId, {
-                            titel: updatedValue
-                        })
-                    }
+
 
                     getData();
                 }
