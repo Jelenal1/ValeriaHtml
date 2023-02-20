@@ -249,3 +249,21 @@ footer .socialmedia-links svg {
     height: 40px;
     color: red;
 }
+
+#inhalt {
+    min-width: 100%;
+    min-height: 10vh;
+}
+
+form input {
+    border-radius: 1rem;
+}
+
+form textarea {
+    border-radius: 1rem;
+}
+
+#list {
+    list-style: none;
+    color: white;
+}

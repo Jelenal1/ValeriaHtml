@@ -35,7 +35,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     const mobileSigninButton = document.getElementById('mobile-signin-button');
     const desktopSigninButton = document.getElementById('desktop-signin-button');
     const desktopform = document.getElementById('signin-desktop');

@@ -2,7 +2,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"
-import { getFirestore, doc, deleteDoc, collection, query, getDocs } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"
+import { getFirestore, doc, deleteDoc, collection, query, getDocs, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -35,67 +35,85 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
+async function getData() {
+    const q = query(collection(db, "posts"));
+    const querySnapshot = await getDocs(q);
+    const alldocsdata = [];
+    querySnapshot.forEach((doc) => {
+        alldocsdata.push({
+            id: doc.id,
+            titel: doc.data().titel,
+            content: doc.data().content,
+            datum: doc.data().datum
+        })
+    })
+    RenderList(alldocsdata)
+
+}
+
+
 function RenderList(list) {
     const listOfToDoItems = document.getElementById("list");
     listOfToDoItems.innerText = "";
     if (list == undefined) return;
     list.forEach((value) => {
+        const wrapper = document.createElement('div')
+        wrapper.classList.add('postwrapper')
         const li = newLi(value);
-        li.append(deleteButton(value.id))
-        li.append(editButton(value.id))
-        listOfToDoItems.append(li);
+        const h1 = newHeading(value);
+        const DateOfCreation = dateOfCreation(value);
+        h1.append(editButton(value.id));
+        h1.append(deleteButton(value.id))
+        wrapper.append(h1);
+        wrapper.append(DateOfCreation)
+        li.append(editButton(value.id));
+        li.append(deleteButton(value.id));
+        wrapper.append(li);
+        listOfToDoItems.append(wrapper);
     });
 }
 
-function deleteButton(ItemToDelete) {
+function deleteButton(ItemToDeleteId) {
     const deletebutton = document.createElement("button");
-    deletebutton.classList.add("button");
-    deletebutton.classList.add("borderblueviolet");
-    deletebutton.classList.add("ms-2"); //code from getbootstrap.com
     deletebutton.innerText = "🗑️";
     deletebutton.addEventListener("click", () => {
-        async function deleteLi(ItemToDelete) {
-            const del = await deleteDoc(doc(db, "posts", ItemToDelete))
+        async function deleteLi(ItemToDeleteId) {
+            await deleteDoc(doc(db, "posts", `${ItemToDeleteId}`));
+            console.log(ItemToDeleteId)
             getData();
         }
-        deleteLi(ItemToDelete);
+        deleteLi(ItemToDeleteId);
     });
     return deletebutton;
 }
 
-function editButton(ItemToEdit) {
+function editButton(ItemToEditId) {
     const editbutton = document.createElement("button");
-    editbutton.classList.add("button");
-    editbutton.classList.add("borderblueviolet");
     editbutton.innerText = "✏️";
-    editbutton.addEventListener("click", () => {
-        const li = document.getElementById(ItemToEdit);
+    editbutton.addEventListener("click", (e) => {
+        const parentOfButton = e.target.parentElement;
         const input = document.createElement("input");
+        console.log(parentOfButton);
         input.setAttribute("type", "text");
         // code from chat.openai.com
-        input.value = li.innerText.slice(0, li.innerText.length - 5);
-        li.innerText = "";
-        li.appendChild(input);
+        input.value = parentOfButton.innerText.slice(0, parentOfButton.innerText.length - 5);
+        parentOfButton.innerText = "";
+        parentOfButton.appendChild(input);
 
         input.addEventListener("keydown", (event) => {
             if (event.key === "Enter" && input.value !== "") {
                 const updatedValue = input.value;
-                li.removeChild(input);
-                async function updateLi(ItemToDelete, updatedValue) {
-                    const update = await fetch(`http://localhost:3000/tasks`, {
-                        method: "PUT",
-                        credentials: "include",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            id: ItemToDelete,
-                            title: updatedValue
+                parentOfButton.removeChild(input);
+                async function updateLi(ItemToEditId, updatedValue) {
+                    if (parentOfButton.classList.contains('heading')) {
+                        await updateDoc(ItemToEditId, {
+                            titel: updatedValue
                         })
-                    });
-                    getData("http://localhost:3000/tasks");
+                    }
+
+                    getData();
                 }
-                updateLi(ItemToEdit, updatedValue);
+                updateLi(ItemToEditId, updatedValue);
 
             }
         });
@@ -105,33 +123,51 @@ function editButton(ItemToEdit) {
 
 function newLi(value) {
     const newItem = document.createElement("li");
-    newItem.classList.add("list-group-item");   //code from getbootstrap.com
-    newItem.classList.add("borderblueviolet");
-    newItem.classList.add("fw-bold");   //code from getbootstrap.com
-    newItem.id = value.id;
-    newItem.innerText = value.title;
+    newItem.classList.add('content')
+    newItem.id = value.titel + "li"
+    newItem.innerText = value.content;
     return newItem;
 }
 
-async function getNewItemsFromInput(url) {
-    const getInputElements = document.getElementById("addtodo");
-    if (getInputElements.value == "") return;
-    const res = await fetch(url, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ title: getInputElements.value })
-    });
-    getData("http://localhost:3000/tasks");
+function newHeading(value) {
+    const newHeading = document.createElement('h1');
+    newHeading.classList.add('heading');
+    newHeading.id = value.titel + "h1";
+    newHeading.innerText = value.titel;
+    return newHeading;
 }
 
-async function getData() {
-    const q = query(collection(db, "posts"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data());
-    })
-    return querySnapshot;
+function dateOfCreation(value) {
+    const newH3 = document.createElement('h3');
+    newH3.classList.add('date');
+    newH3.id = value.titel + "datum";
+    newH3.innerText = value.datum;
+    return newH3;
 }
+
+async function getNewItemsFromInput() {
+    const getInputTitel = document.getElementById("titel");
+    const getInputText = document.getElementById("inhalt");
+    const date = new Date();
+    if (getInputTitel.value === "" || getInputText.value === "") return;
+    const data = {
+        datum: date.toLocaleDateString(),
+        content: getInputText.value,
+        titel: getInputTitel.value
+    }
+
+    await setDoc(doc(db, "posts", date.toISOString()), data)
+    getData();
+    getInputTitel.value = "";
+    getInputText.value = "";
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const NewItemInputForm = document.getElementById('postInput')
+    getData()
+    NewItemInputForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        getNewItemsFromInput()
+    })
+
+})
