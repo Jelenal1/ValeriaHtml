@@ -9,19 +9,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!sideNavToggler.classList.contains('onnavbar')) {
         sideNavToggler.classList.add('onnavbar')
     }
-    if (!signInDesktop.classList.contains('nonedisplay')) {
-        signInDesktop.classList.add('nonedisplay')
-    }
     sideNavToggler.addEventListener('click', (e) => {
         bottomNav.classList.toggle('hidden');
         sideNavToggler.classList.toggle('onnavbar');
     });
 
-    signInButtons[0].addEventListener('click', () => {
-        signInDesktop.classList.toggle('nonedisplay')
-    })
-    signInButtons[1].addEventListener('click', () => {
-        signInDesktop.classList.toggle('nonedisplay')
-    })
+    if (signInDesktop) { }
+
+    function ShowSignInForm() {
+        if (!signInDesktop.classList.contains('nonedisplay')) {
+            signInDesktop.classList.add('nonedisplay')
+        }
+        signInButtons[0].addEventListener('click', () => {
+            signInDesktop.classList.toggle('nonedisplay')
+        })
+        signInButtons[1].addEventListener('click', () => {
+            signInDesktop.classList.toggle('nonedisplay')
+        })
+    }
+
+
 
 });

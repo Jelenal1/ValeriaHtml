@@ -2,8 +2,7 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"
+import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -33,47 +32,33 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const mobileSigninButton = document.getElementById('mobile-signin-button');
-    const desktopSigninButton = document.getElementById('desktop-signin-button');
-    const desktopform = document.getElementById('signin-desktop');
+const Form = document.getElementById('signin-desktop');
+const SignOutButton = document.getElementById('logout')
 
-    if (!desktopform.classList.contains('nonedisplay')) {
-        desktopform.classList.add('nonedisplay')
-    }
-    mobileSigninButton.addEventListener('click', (e) => {
-        desktopform.classList.toggle('nonedisplay');
-    })
-    desktopSigninButton.addEventListener('click', (e) => {
-        desktopform.classList.toggle('nonedisplay');
-    })
-
-    desktopform.addEventListener('submit', (event) => {
-        event.preventDefault();
-        signInWithEmailAndPassword(auth, desktopform.children[0].value, desktopform.children[1].value)
-            .then((userCredential) => {
-                // Signed in 
-                console.log(userCredential.user)
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage)
-            });
-    })
-
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            const uid = user.uid;
-            // ...
-        } else {
-            // User is signed out
-            // ...
+Form.addEventListener('submit', e => {
+    e.preventDefault()
+    const EmailInput = document.getElementById('email');
+    const PasswordInput = document.getElementById('password');
+    async function login() {
+        try {
+            await signInWithEmailAndPassword(auth, EmailInput.value, PasswordInput.value);
+        } catch (error) {
+            console.log(error)
         }
-    });
+    }
+    login()
+    EmailInput.value = '';
+    PasswordInput.value = '';
+})
+
+SignOutButton.addEventListener('click', e => {
+    async function logout() {
+        try {
+            await signOut(auth)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    logout()
 })

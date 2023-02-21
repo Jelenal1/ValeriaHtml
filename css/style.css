@@ -263,7 +263,15 @@ form textarea {
     border-radius: 1rem;
 }
 
-#list {
-    list-style: none;
+
+#list li {
+    margin-left: 1rem;
     color: white;
+    font-family: Arial, sans-serif;
+    list-style: none;
+}
+
+#list input {
+    width: 97%;
+    height: 20%;
 }

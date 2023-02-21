@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"
 import { getFirestore, doc, deleteDoc, collection, query, getDocs, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -62,11 +62,11 @@ function RenderList(list) {
         const li = newLi(value);
         const h1 = newHeading(value);
         const DateOfCreation = dateOfCreation(value);
-        h1.append(editButton(value.id));
+        h1.append(editButton(value.id, "titel"));
         h1.append(deleteButton(value.id))
         wrapper.append(h1);
         wrapper.append(DateOfCreation)
-        li.append(editButton(value.id));
+        li.append(editButton(value.id, "content"));
         li.append(deleteButton(value.id));
         wrapper.append(li);
         listOfToDoItems.append(wrapper);
@@ -76,10 +76,17 @@ function RenderList(list) {
 function deleteButton(ItemToDeleteId) {
     const deletebutton = document.createElement("button");
     deletebutton.innerText = "🗑️";
+    onAuthStateChanged(auth, user => {
+        if (!user) {
+            deletebutton.classList.add('nonedisplay')
+        } else {
+            deletebutton.classList.remove('nonedisplay')
+        }
+    })
+    deletebutton.classList.add('deletebutton');
     deletebutton.addEventListener("click", () => {
         async function deleteLi(ItemToDeleteId) {
             await deleteDoc(doc(db, "posts", `${ItemToDeleteId}`));
-            console.log(ItemToDeleteId)
             getData();
         }
         deleteLi(ItemToDeleteId);
@@ -87,29 +94,43 @@ function deleteButton(ItemToDeleteId) {
     return deletebutton;
 }
 
-function editButton(ItemToEditId) {
+function editButton(ItemToEditId, FieldToEdit) {
     const editbutton = document.createElement("button");
     editbutton.innerText = "✏️";
+    onAuthStateChanged(auth, user => {
+        if (!user) {
+            editbutton.classList.add('nonedisplay')
+        } else {
+            editbutton.classList.remove('nonedisplay')
+        }
+    })
+    editbutton.classList.add('editbutton');
     editbutton.addEventListener("click", (e) => {
         const parentOfButton = e.target.parentElement;
-        const input = document.createElement("input");
-        console.log(parentOfButton);
-        input.setAttribute("type", "text");
+        const input = document.createElement("textarea");
+        const inputSubmit = document.createElement('button');
+        input.setAttribute("name", "input");
         // code from chat.openai.com
         input.value = parentOfButton.innerText.slice(0, parentOfButton.innerText.length - 5);
+        inputSubmit.innerText = '✓'
         parentOfButton.innerText = "";
         parentOfButton.appendChild(input);
+        parentOfButton.appendChild(inputSubmit)
 
-        input.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" && input.value !== "") {
+        inputSubmit.addEventListener("click", () => {
+            if (input.value !== "") {
                 const updatedValue = input.value;
+                const updateRef = doc(db, "posts", ItemToEditId)
                 parentOfButton.removeChild(input);
-                async function updateLi(ItemToEditId, updatedValue) {
-
+                async function updateLi(FieldToEdit, updatedValue) {
+                    await updateDoc(updateRef, {
+                        [FieldToEdit]: updatedValue,
+                        datum: (new Date()).toLocaleDateString()
+                    })
 
                     getData();
                 }
-                updateLi(ItemToEditId, updatedValue);
+                updateLi(FieldToEdit, updatedValue);
 
             }
         });
@@ -135,7 +156,7 @@ function newHeading(value) {
 
 function dateOfCreation(value) {
     const newH3 = document.createElement('h3');
-    newH3.classList.add('date');
+    newH3.classList.add('datum');
     newH3.id = value.titel + "datum";
     newH3.innerText = value.datum;
     return newH3;
@@ -164,6 +185,13 @@ document.addEventListener('DOMContentLoaded', () => {
     NewItemInputForm.addEventListener('submit', (e) => {
         e.preventDefault()
         getNewItemsFromInput()
+    })
+    onAuthStateChanged(auth, user => {
+        if (!user) {
+            NewItemInputForm.classList.add('nonedisplay')
+        } else {
+            NewItemInputForm.classList.remove('nonedisplay')
+        }
     })
 
 })
