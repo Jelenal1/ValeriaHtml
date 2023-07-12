@@ -1,22 +1,22 @@
 # Valeria Muster Website
 
-## Technologien
-Als Entwicklerin habe ich die Seite komplett in HTML5, CSS3 und Vanilla JavaScript erstellt, um den aktuellen Standards für Webdesign und Webentwicklung zu entsprechen.
+## Technologies
+As a developer, I have created the website using HTML5, CSS3, and Vanilla JavaScript to comply with the latest standards for web design and development.
 
 ## Design
-Ich habe das Design der Webseite von Grund auf selbst entworfen. Es wurde kein KI-Assistent oder Drittpartei-Design-Tool verwendet. Mein Fokus lag auf einer klaren, intuitiven Nutzerführung und einem ästhetisch ansprechenden Layout.
+I designed the website from scratch without using any AI assistant or third-party design tools. My focus was on providing a clear, intuitive user experience and an aesthetically appealing layout.
 
-## Responsives Design
-Die Website wurde responsiv gestaltet, um sicherzustellen, dass sie auf einer Vielzahl von Geräten optimal dargestellt wird. Unabhängig von der Gerätegröße - ob Desktop, Tablet oder Smartphone - wird den Nutzern ein angenehmes Surferlebnis geboten.
+## Responsive Design
+The website has been designed to be responsive, ensuring optimal display on a variety of devices. Whether it's a desktop, tablet, or smartphone, users will have a pleasant browsing experience.
 
 ## Firebase
-Firebase wurde als Backend-Service für die Website verwendet. Firebase bietet eine Reihe von Diensten, einschließlich einer Echtzeit-Datenbank, Benutzerauthentifizierung und Hosting. Da Firebase sich um Aspekte wie Sicherheit und Performance kümmert, konnte ich mich auf das Erstellen der eigentlichen Webanwendung konzentrieren.
+Firebase was used as the backend service for the website. Firebase offers a range of services, including real-time database, user authentication, and hosting. By leveraging Firebase for aspects such as security and performance, I was able to concentrate on building the actual web application.
 
 ## Blog
-Die Blog-Funktion ist ein zentraler Bestandteil der Website. Sie verfügt über eine Nutzer- und eine Admin-Ansicht, wobei letztere nur bestimmten Personen zugänglich ist. Ich habe die Funktionalitäten entwickelt, um Beiträge hinzuzufügen, bearbeiten und löschen zu können. Diese Funktionen wurden vollständig mit Vanilla JavaScript implementiert.
+The blog feature is a central component of the website. It includes both a user view and an admin view, with the latter accessible only to authorized individuals. I have developed the functionalities to add, edit, and delete posts. These features have been implemented entirely using Vanilla JavaScript.
 
-## Administrationsseite
-Die Administrationsseite bietet umfangreiche Funktionen zur Verwaltung der Website und des Blogs. Nur die autorisierten Personen haben Zugang zu diesem Bereich und können neue Blog-Beiträge erstellen, bestehende Beiträge bearbeiten oder löschen und die Nutzer verwalten.
+## Administration Page
+The administration page provides extensive functionalities for managing the website and blog. Only authorized individuals have access to this area and can create new blog posts, edit or delete existing posts, and manage users.
 
-# Fazit
-Mit "ValeriaHtml" habe ich eine überzeugende und effektive Plattform für die Kandidatin erstellt. Die Kombination aus einem intuitiven, ansprechenden Design, den Vorteilen von Firebase und den umfangreichen Funktionen der Administrationsseite machen die Website zu einem wertvollen Instrument für die Wahlkampagne.
+# Conclusion
+With "ValeriaHtml," I have created a compelling and effective platform for the candidate. The combination of an intuitive, appealing design, the benefits of Firebase, and the extensive features of the administration page make the website a valuable tool for the election campaign.
